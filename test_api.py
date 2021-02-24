@@ -49,10 +49,18 @@ print(csrf, session)
 s, b = _do_api_request('group_data', {})
 print(s, b)
 
+username = 'xyz123'
+role = 'manager'
 group = {'group_name': 'datamanager-aimms',
          'category': 'aimms',
          'subcategory': 'dm',
          'description': 'created by web api',
          'data_classification': 'restricted'}
 s, b = _do_api_request('group_create', group)
+print(s, b)
+
+s, b = _do_api_request('group_user_add', {'username': username, 'group_name': group['group_name']})
+print(s, b)
+
+s, b = _do_api_request('group_user_update_role', {'username': username, 'group_name': group['group_name'], 'new_role': role})
 print(s, b)
