@@ -32,13 +32,12 @@ def _do_group_manager_request(command, data):
     # Disable unsecure connection warning.
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     url = f'{YODA_PORTAL}/group-manager/{command}'
-    print(url)
-    #files = {'csrf_yoda': (None, csrf), 'data': (None, json.dumps(data))}
+
     cookies = {'csrf_yoda': csrf, 'yoda_session': session}
     data['csrf_yoda'] = csrf
-    #res = requests.post(url, files=files, cookies=cookies, verify=False, timeout=10)
+
     res = requests.post(url, data=data, cookies=cookies, verify=False, timeout=10)
-    print(res)
+
     body = res.json()
 
     return (res.status_code, body)
